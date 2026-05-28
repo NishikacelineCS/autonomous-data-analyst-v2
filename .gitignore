@@ -1,13 +1,6 @@
-# =============================================================================
-# requirements.txt — Autonomous Multi-Agent Data Analyst System
-# =============================================================================
-# Pin versions for reproducibility in production.
-# Regenerate with: pip freeze > requirements-lock.txt after installing.
-#
-# Installation:
-#   python -m venv venv && source venv/bin/activate
-#   pip install -r requirements.txt
-# =============================================================================
+venv/
+__pycache__/
+.env
 
 # ── Web Framework ─────────────────────────────────────────────────────────────
 fastapi==0.115.4               # Async REST API framework with auto OpenAPI docs
