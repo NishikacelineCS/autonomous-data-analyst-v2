@@ -1,4 +1,6 @@
 from fastapi import APIRouter, UploadFile, File
+import pandas as pd
+from io import StringIO
 
 router = APIRouter()
 
@@ -8,14 +10,18 @@ async def upload_dataset(file: UploadFile = File(...)):
     """
     Accept a CSV or Excel file upload.
     Swagger: POST /api/v1/upload/
-
-    Not yet implemented — returns the filename and size for confirmation.
     """
+
     content = await file.read()
+
+    csv_string = content.decode("utf-8")
+
+    df = pd.read_csv(StringIO(csv_string))
+
     return {
         "filename": file.filename,
-        "content_type": file.content_type,
-        "size_bytes": len(content),
-        "status": "received",
-        "message": "Upload endpoint reached. Processing not yet implemented.",
+        "rows": len(df),
+        "columns": len(df.columns),
+        "column_names": df.columns.tolist(),
+        "preview": df.head().to_dict(orient="records")
     }
