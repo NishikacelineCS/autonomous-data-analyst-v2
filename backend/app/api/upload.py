@@ -1,6 +1,8 @@
 from fastapi import APIRouter, UploadFile, File
 import pandas as pd
 from io import StringIO
+from backend.app.services.profiler import generate_profile
+from backend.app.services.analyzer import generate_insights
 
 router = APIRouter()
 
@@ -18,14 +20,11 @@ async def upload_dataset(file: UploadFile = File(...)):
 
     df = pd.read_csv(StringIO(csv_string))
 
+    profile = generate_profile(df)
+    insights = generate_insights(profile)
+
     return {
-        "filename": file.filename,
-        "rows": len(df),
-        "columns": len(df.columns),
-        "column_names": df.columns.tolist(),
-        "preview": df.head().to_dict(orient="records"),
-        "data_types": df.dtypes.astype(str).to_dict(),
-        "missing_values": df.isnull().sum().to_dict(),
-        "duplicate_rows": int(df.duplicated().sum()),
-        "numeric_summary": df.describe(include=["number"]).to_dict()
-    }
+    "filename": file.filename,
+    **profile,
+    "insights": insights
+}
