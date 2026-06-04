@@ -21,7 +21,7 @@ async def upload_dataset(file: UploadFile = File(...)):
     df = pd.read_csv(StringIO(csv_string))
 
     profile = generate_profile(df)
-    insights = generate_insights(profile)
+    insights = generate_insights(df)
 
     return {
     "filename": file.filename,
