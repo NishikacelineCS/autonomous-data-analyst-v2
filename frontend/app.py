@@ -42,10 +42,10 @@ if uploaded_file is not None:
 
     with st.spinner("Analyzing dataset..."):
 
-        response = requests.post(
-            "http://127.0.0.1:8000/api/v1/upload/",
-            files=files
-        )
+       response = requests.post(
+    "https://autonomous-data-analyst-api.onrender.com/api/v1/upload/",
+    files=files
+)
 
     if response.status_code == 200:
 
