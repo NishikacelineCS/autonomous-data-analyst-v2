@@ -6,7 +6,7 @@ import requests
 # Page Config
 # -----------------------------
 st.set_page_config(
-    page_title="Autonomous Data Analyst",
+    page_title="Agentic Data Analysis System ",
     page_icon="🤖",
     layout="wide"
 )
@@ -14,7 +14,8 @@ st.set_page_config(
 # -----------------------------
 # Title
 # -----------------------------
-st.title("🤖 Autonomous Data Analyst")
+st.title("🤖 Agentic Data Analysis System ")
+st.caption("AI-Powered Dataset Profiling and Insight Generation Platform")
 st.markdown("Upload a CSV dataset and automatically generate insights.")
 
 st.divider()
